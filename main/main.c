@@ -128,7 +128,8 @@ void main()
                 cero_encoder();
                 break;
             case 'Z':       // Pongo el encoder en cero
-                setZero();
+                //setZero();     // Para el esclavo horizontal
+                set90();       // Para el esclavo vertical
                 break;
             case 'u':       // Actualizo el Set Point
                 set_point = (fifo_rx[1] * 256 + fifo_rx[2]) / 100.0;
@@ -249,7 +250,7 @@ void cero_encoder(void)
     if (isSwitchOn() != FC_AH)
     { // Si no estoy al final de AH
         printf("-> Buscando la posicion inicial...\r\n");
-        motor_move_ah((uint16_t) (0.25 * TOP_VALUE_COUNT)); // Me muevo AH a un 25% de VMAX
+        motor_move_ah((uint16_t) (0.75 * TOP_VALUE_COUNT)); // Me muevo AH a un 25% de VMAX
         getData(&enc_test);
         printf("--> Angulo: %0.2f \r\n", enc_test.angle);
         while (isSwitchOn() != FC_AH); // Espero a llegar al final de AH

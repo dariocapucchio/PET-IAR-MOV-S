@@ -64,12 +64,21 @@ void read_state(){
 
 
 void setZero(){
-    encoder.angle = 0 ; 
-    encoder.count_pulses = 0 ; 
+    encoder.angle = 0;
+    encoder.count_pulses = 0;
     //3  ;
-    encoder.direction = COUNTER_STILL ; 
+    encoder.direction = COUNTER_STILL; 
 }  
 
+/**
+ * @brief Pone el angulo en 90
+ * 
+ */
+void set90(){
+    encoder.angle = 90.0;
+    encoder.count_pulses = MAX_COUNT_PULSES_PER_REV/4;  // Pulsos equivalentes a 90 grados
+    encoder.direction = COUNTER_STILL;
+}
 
 
 void fsm_encoder(const state_quad_enc_t new_state){
