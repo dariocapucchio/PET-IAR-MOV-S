@@ -10,7 +10,7 @@
 
 // Relacion movimiento vertical
 #define MAX_COUNT_PULSES_PER_REV  1755
-#define CONVERSION_PULSES_FACTOR (360.0/1755.0)
+#define CONVERSION_PULSES_FACTOR (0.3077)
 
 #define DELAY_SIGNAL 800 /// time signal for a control of still state encoder_t 
 

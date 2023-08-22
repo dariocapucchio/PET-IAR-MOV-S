@@ -76,7 +76,7 @@ void setZero(){
  */
 void set90(){
     encoder.angle = 90.0;
-    encoder.count_pulses = MAX_COUNT_PULSES_PER_REV/4;  // Pulsos equivalentes a 90 grados
+    encoder.count_pulses = 90.0/CONVERSION_PULSES_FACTOR;  // Pulsos equivalentes a 90 grados
     encoder.direction = COUNTER_STILL;
 }
 
