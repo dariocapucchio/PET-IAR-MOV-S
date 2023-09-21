@@ -181,9 +181,10 @@ void main()
             counter_test = 0;
         }
         // Alive test
-        //getData(&enc_test);
+        getData(&enc_test);
         //printf("-> Angulo: %0.2f \r\n", enc_test.angle);
         //printf("-> Pulsos: %d \r\n",enc_test.count_pulses);
+        printf("%d\r\n",enc_test.count_pulses);
         sleep_ms(100);
     }
 }

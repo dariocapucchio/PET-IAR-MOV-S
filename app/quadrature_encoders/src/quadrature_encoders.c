@@ -94,13 +94,13 @@ void fsm_encoder(const state_quad_enc_t new_state){
                     encoder.direction = COUNTER_CLOCKWISE ; 
                     count_state = 0;
                 }
-                count_state++ ; 
+                count_state++; 
                 if (count_state%4 == 0){
                     clock_speed = time_us_64() - clock_speed ; 
                     encoder.speed = (1/(float) clock_speed) *CONVERSION_PULSES_FACTOR ;
                     count_state = 0; 
                     encoder.count_pulses++ ; 
-                    //encoder.count_pulses = (encoder.count_pulses + MAX_COUNT_PULSES_PER_REV)%MAX_COUNT_PULSES_PER_REV ; 
+                    encoder.count_pulses = (encoder.count_pulses + MAX_COUNT_PULSES_PER_REV)%MAX_COUNT_PULSES_PER_REV ; 
                     encoder.angle = encoder.count_pulses*CONVERSION_PULSES_FACTOR ; 
                     clock_speed =  time_us_64()  ; 
                 }
@@ -110,8 +110,9 @@ void fsm_encoder(const state_quad_enc_t new_state){
                     clock_speed =  time_us_64()  ; 
                     encoder.direction = COUNTER_ANTICLOCKWISE ; 
                     count_state = 0 ; 
-                }else if (encoder.direction ==COUNTER_CLOCKWISE){ 
-                    encoder.direction = COUNTER_ANTICLOCKWISE ; 
+                }else if (encoder.direction == COUNTER_CLOCKWISE){ 
+                    encoder.direction = COUNTER_ANTICLOCKWISE ;
+                    count_state = 0;        // ESTE RESETEO NO ESTABA - Lo agregue yo (capu) 
                 }
 
                 count_state++ ; 
@@ -120,7 +121,7 @@ void fsm_encoder(const state_quad_enc_t new_state){
                     encoder.speed = -1.0*(1/(float) clock_speed) *CONVERSION_PULSES_FACTOR ;
                     count_state = 0;                     
                     encoder.count_pulses-- ; 
-                    //encoder.count_pulses = (encoder.count_pulses + MAX_COUNT_PULSES_PER_REV)%MAX_COUNT_PULSES_PER_REV ; 
+                    encoder.count_pulses = (encoder.count_pulses + MAX_COUNT_PULSES_PER_REV)%MAX_COUNT_PULSES_PER_REV ; 
                     encoder.angle = encoder.count_pulses*CONVERSION_PULSES_FACTOR ; 
                     clock_speed =  time_us_64()  ;  // lo agregue yo
                 }
@@ -133,7 +134,7 @@ void fsm_encoder(const state_quad_enc_t new_state){
                     clock_speed = time_us_64() ; 
                     encoder.direction = COUNTER_CLOCKWISE ; 
                     count_state = 0 ;
-                }else if (encoder.direction ==COUNTER_ANTICLOCKWISE){ 
+                }else if (encoder.direction == COUNTER_ANTICLOCKWISE){ 
                     encoder.direction = COUNTER_CLOCKWISE ; 
                     count_state = 0 ;
                 }
@@ -143,7 +144,7 @@ void fsm_encoder(const state_quad_enc_t new_state){
                     encoder.speed = (1.0/(float) clock_speed) *CONVERSION_PULSES_FACTOR ;
                     count_state = 0 ; 
                     encoder.count_pulses++ ; 
-                    //encoder.count_pulses = (encoder.count_pulses + MAX_COUNT_PULSES_PER_REV)%MAX_COUNT_PULSES_PER_REV ; 
+                    encoder.count_pulses = (encoder.count_pulses + MAX_COUNT_PULSES_PER_REV)%MAX_COUNT_PULSES_PER_REV ; 
                     encoder.angle = encoder.count_pulses*CONVERSION_PULSES_FACTOR ; 
                     clock_speed = time_us_64() ; 
                 }
@@ -164,7 +165,7 @@ void fsm_encoder(const state_quad_enc_t new_state){
                     encoder.speed = -(1.0/(float) clock_speed) *CONVERSION_PULSES_FACTOR ; 
                     count_state = 0  ; 
                     encoder.count_pulses-- ; 
-                    //encoder.count_pulses = (encoder.count_pulses + MAX_COUNT_PULSES_PER_REV)%MAX_COUNT_PULSES_PER_REV ; 
+                    encoder.count_pulses = (encoder.count_pulses + MAX_COUNT_PULSES_PER_REV)%MAX_COUNT_PULSES_PER_REV ; 
                     encoder.angle = encoder.count_pulses*CONVERSION_PULSES_FACTOR ; 
                     clock_speed = time_us_64() ; 
                 }
@@ -189,7 +190,7 @@ void fsm_encoder(const state_quad_enc_t new_state){
                     encoder.speed = (1.0/(float) clock_speed) *CONVERSION_PULSES_FACTOR ; 
                     count_state = 0 ; 
                     encoder.count_pulses++ ; 
-                    //encoder.count_pulses = (encoder.count_pulses + MAX_COUNT_PULSES_PER_REV)%MAX_COUNT_PULSES_PER_REV ; 
+                    encoder.count_pulses = (encoder.count_pulses + MAX_COUNT_PULSES_PER_REV)%MAX_COUNT_PULSES_PER_REV ; 
                     encoder.angle = encoder.count_pulses*CONVERSION_PULSES_FACTOR ; 
                     clock_speed = time_us_64() ; 
                 }
@@ -211,7 +212,7 @@ void fsm_encoder(const state_quad_enc_t new_state){
                     encoder.speed = -(1.0/(float) clock_speed) *CONVERSION_PULSES_FACTOR ;  
                     count_state = 0 ; 
                     encoder.count_pulses-- ; 
-                    //encoder.count_pulses = (encoder.count_pulses + MAX_COUNT_PULSES_PER_REV)%MAX_COUNT_PULSES_PER_REV ; 
+                    encoder.count_pulses = (encoder.count_pulses + MAX_COUNT_PULSES_PER_REV)%MAX_COUNT_PULSES_PER_REV ; 
                     encoder.angle = encoder.count_pulses*CONVERSION_PULSES_FACTOR ; 
                     clock_speed = time_us_64() ; 
                 }
@@ -232,9 +233,9 @@ void fsm_encoder(const state_quad_enc_t new_state){
                 if (count_state%4 == 0){
                     clock_speed =time_us_64() - clock_speed ; 
                     encoder.speed = (1.0/(float) clock_speed) *CONVERSION_PULSES_FACTOR ; 
-                    count_state =0 ; 
+                    count_state = 0 ; 
                     encoder.count_pulses++ ; 
-                    //encoder.count_pulses = (encoder.count_pulses + MAX_COUNT_PULSES_PER_REV)%MAX_COUNT_PULSES_PER_REV ; 
+                    encoder.count_pulses = (encoder.count_pulses + MAX_COUNT_PULSES_PER_REV)%MAX_COUNT_PULSES_PER_REV ; 
                     encoder.angle = encoder.count_pulses*CONVERSION_PULSES_FACTOR ; 
                     clock_speed = time_us_64() ; 
 
@@ -257,7 +258,7 @@ void fsm_encoder(const state_quad_enc_t new_state){
                     clock_speed = time_us_64() - clock_speed ;  
                     encoder.speed = -(1.0/(float) clock_speed) *CONVERSION_PULSES_FACTOR ; 
                     encoder.count_pulses-- ; 
-                    //encoder.count_pulses = (encoder.count_pulses + MAX_COUNT_PULSES_PER_REV)%MAX_COUNT_PULSES_PER_REV ; 
+                    encoder.count_pulses = (encoder.count_pulses + MAX_COUNT_PULSES_PER_REV)%MAX_COUNT_PULSES_PER_REV ; 
                     encoder.angle = encoder.count_pulses *CONVERSION_PULSES_FACTOR ; 
                     clock_speed = time_us_64() ;
                 }
@@ -298,7 +299,7 @@ static void gpio_callback_channel_ab(uint gpio,uint32_t event_mask ) {
 
     }else return ; 
     ///FIXME: CHANGE FOR A QUEUE 
-    fsm_encoder(new_state);  
+    fsm_encoder(new_state); 
 }
 
 
