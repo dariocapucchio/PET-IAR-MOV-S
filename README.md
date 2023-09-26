@@ -23,3 +23,13 @@ Crea los archivos binarios dentro de la carpeta build/main/*
 - Raspberry pi pico
 - BTS7960 - Modulo puente H 5.5V a 27V 43A
 - Encoders
+
+## Horizontal vs Vertical
+Modificaciones para utilizar el código en el esclavo horizontal o vertical.
+
+ - Descomentar la direccion correcta en el archivo i2c_slave.h
+ -- Horizontal: 0x42
+ -- Vertical: 0x48
+ - Funcion de seteo de cero en el archivo main.c linea 130 (comando 'Z')
+ -- Horizontal: setZero();
+ -- Vertical: set90();
